@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: public-services
+  main:
+    banner-mode: off
+  datasource:
+    url: jdbc:postgresql://localhost:5432/public-services
+    username: root
+    password: root
+    hikari:
+      maxLifetime: 60000
+      maximum-pool-size: 20
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+  jackson:
+    default-property-inclusion: non_null
+    date-format: yyyy-MM-dd
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  data:
+    web:
+      pageable:
+        one-indexed-parameters: true
+        default-page-size: 10
+
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+    context-path: /public-services
+  port: 8080
+logging:
+  level:
+    org.springframework.web: ERROR
