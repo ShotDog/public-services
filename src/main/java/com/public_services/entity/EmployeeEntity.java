@@ -19,7 +19,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class Employee extends Audit{
+public class EmployeeEntity extends Audit{
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -51,8 +51,8 @@ public class Employee extends Audit{
         Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
         Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
-        Employee employee = (Employee) o;
-        return getId() != null && Objects.equals(getId(), employee.getId());
+        EmployeeEntity employeeEntity = (EmployeeEntity) o;
+        return getId() != null && Objects.equals(getId(), employeeEntity.getId());
     }
 
     @Override

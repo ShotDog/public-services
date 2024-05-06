@@ -4,7 +4,7 @@ import com.public_services.controller.request.CreateEmployeeRequest;
 import com.public_services.controller.request.CreateLoginRequest;
 import com.public_services.controller.request.UpdateEmployeeRequest;
 import com.public_services.controller.response.EmployeeResponse;
-import com.public_services.entity.Employee;
+import com.public_services.entity.EmployeeEntity;
 import com.public_services.entity.LoginEntity;
 import com.public_services.enums.Rate;
 import com.public_services.mapper.EmployeesMapper;
@@ -28,26 +28,26 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Long create(CreateEmployeeRequest createEmployeeRequest) {
-        Employee employee = employeesMapper.toEntity(createEmployeeRequest);
-        employee.setRate(createEmployeeRequest.getRate() == null ? Rate.FIVE_AND_TWO : Rate.parseText(createEmployeeRequest.getRate()));
+        EmployeeEntity employeeEntity = employeesMapper.toEntity(createEmployeeRequest);
+        employeeEntity.setRate(createEmployeeRequest.getRate() == null ? Rate.FIVE_AND_TWO : Rate.parseText(createEmployeeRequest.getRate()));
 
         CreateLoginRequest createLoginRequest = new CreateLoginRequest(createEmployeeRequest.getEmail(), null);
         Long loginId = loginService.create(createLoginRequest);
-        employee.setLogin(new LoginEntity().setId(loginId));
-        return employeeRepository.save(employee).getId();
+        employeeEntity.setLogin(new LoginEntity().setId(loginId));
+        return employeeRepository.save(employeeEntity).getId();
     }
 
     @Override
     public Page<EmployeeResponse> findAll(Pageable pageable) {
-        Page<Employee> employees = employeeRepository.findAll(pageable);
+        Page<EmployeeEntity> employees = employeeRepository.findAll(pageable);
         return employees.map(employeesMapper::toResponse);
     }
 
     @Override
     public void update(Long id, UpdateEmployeeRequest updateEmployeeRequest) {
-        Employee employee = getById(id);
-        update(employee, updateEmployeeRequest);
-        employeeRepository.save(employee);
+        EmployeeEntity employeeEntity = getById(id);
+        update(employeeEntity, updateEmployeeRequest);
+        employeeRepository.save(employeeEntity);
     }
 
     @Override
@@ -55,16 +55,16 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeRepository.deleteById(id);
     }
 
-    private Employee getById(Long id) {
+    private EmployeeEntity getById(Long id) {
         return employeeRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
-    private void update(Employee employee, UpdateEmployeeRequest updateEmployeeRequest) {
+    private void update(EmployeeEntity employeeEntity, UpdateEmployeeRequest updateEmployeeRequest) {
         if (updateEmployeeRequest.getFullName() != null) {
-            employee.setFullName(updateEmployeeRequest.getFullName());
+            employeeEntity.setFullName(updateEmployeeRequest.getFullName());
         }
         if (updateEmployeeRequest.getPosition() != null) {
-            employee.setPosition(updateEmployeeRequest.getPosition());
+            employeeEntity.setPosition(updateEmployeeRequest.getPosition());
         }
     }
 }

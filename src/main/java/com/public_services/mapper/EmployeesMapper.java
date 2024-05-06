@@ -2,7 +2,7 @@ package com.public_services.mapper;
 
 import com.public_services.controller.request.CreateEmployeeRequest;
 import com.public_services.controller.response.EmployeeResponse;
-import com.public_services.entity.Employee;
+import com.public_services.entity.EmployeeEntity;
 import com.public_services.enums.Rate;
 import org.mapstruct.*;
 
@@ -11,18 +11,18 @@ public interface EmployeesMapper {
 
     @Mapping(source = "organizationId", target = "organization.id")
     @Mapping(source = "rate", target = "rate", qualifiedByName = "mapStringEnum")
-    Employee toEntity(CreateEmployeeRequest createEmployeeRequest);
+    EmployeeEntity toEntity(CreateEmployeeRequest createEmployeeRequest);
 
     @Mapping(source = "organization.id", target = "organizationId")
-    CreateEmployeeRequest toDto(Employee employee);
+    CreateEmployeeRequest toDto(EmployeeEntity employeeEntity);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(source = "organizationId", target = "organization.id")
-    Employee partialUpdate(CreateEmployeeRequest createEmployeeRequest, @MappingTarget Employee employee);
+    EmployeeEntity partialUpdate(CreateEmployeeRequest createEmployeeRequest, @MappingTarget EmployeeEntity employeeEntity);
 
     @Mapping(source = "rate", target = "rate", qualifiedByName = "mapRateEnum")
     @Mapping(source = "login.email", target = "email")
-    EmployeeResponse toResponse(Employee employee);
+    EmployeeResponse toResponse(EmployeeEntity employeeEntity);
 
     @Named("mapRateEnum")
     default String toStringRate(Rate rate) {
