@@ -9,6 +9,7 @@ import lombok.Setter;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.proxy.HibernateProxy;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -32,11 +33,17 @@ public class OrganizationEntity extends Audit {
     private String pan;
 
     @Column(name = OrganizationEntity_.LOCATION)
-    private String location;
+    private String address;
+
+    @Column(name = OrganizationEntity_.SERVICES)
+    @ElementCollection
+    private List<String> services;
 
     @ManyToOne
     @JoinColumn(name = OrganizationEntity_.LOGIN_ID)
     private LoginEntity loginEntity;
+
+
 
     @Override
     public final boolean equals(Object o) {
@@ -56,6 +63,6 @@ public class OrganizationEntity extends Audit {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "(" + "id = " + getId() + ", " + "name = " + getName() + ", " + "pan = " + getPan() + ", " + "location = " + getLocation() + ", " + "loginEntity = " + getLoginEntity() + ", " + "createdDate = " + getCreatedDate() + ", " + "updatedDate = " + getUpdatedDate() + ")";
+        return getClass().getSimpleName() + "(" + "id = " + getId() + ", " + "name = " + getName() + ", " + "pan = " + getPan() + ", " + "location = " + getAddress() + ", " + "loginEntity = " + getLoginEntity() + ", " + "createdDate = " + getCreatedDate() + ", " + "updatedDate = " + getUpdatedDate() + ")";
     }
 }

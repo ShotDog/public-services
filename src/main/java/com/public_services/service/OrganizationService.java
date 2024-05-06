@@ -1,6 +1,7 @@
 package com.public_services.service;
 
 import com.public_services.controller.request.CreateOrganizationRequest;
+import com.public_services.controller.request.UpdateOrganizationRequest;
 import com.public_services.controller.response.OrganizationResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,5 +13,9 @@ public interface OrganizationService {
     Page<OrganizationResponse> findAll(Pageable pageable);
 
     OrganizationResponse findById(Long id);
+
+    void update(Long id, UpdateOrganizationRequest organizationRequest);
+
+    void delete(Long id);
 
 }

@@ -11,6 +11,6 @@ public class CreateOrganizationRequest {
 
     private String name;
     private String pan;
-    private String location;
+    private String address;
     private Long loginId;
 }

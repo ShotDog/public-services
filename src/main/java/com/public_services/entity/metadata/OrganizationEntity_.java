@@ -12,5 +12,5 @@ public class OrganizationEntity_ {
     public static final String PAN = "pan";
     public static final String LOCATION = "location";
     public static final String LOGIN_ID = "login_id";
-
+    public static final String SERVICES = "services";
 }

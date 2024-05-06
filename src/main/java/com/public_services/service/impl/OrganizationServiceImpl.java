@@ -1,6 +1,7 @@
 package com.public_services.service.impl;
 
 import com.public_services.controller.request.CreateOrganizationRequest;
+import com.public_services.controller.request.UpdateOrganizationRequest;
 import com.public_services.controller.response.OrganizationResponse;
 import com.public_services.entity.LoginEntity;
 import com.public_services.entity.OrganizationEntity;
@@ -23,7 +24,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     @Override
     public Long create(CreateOrganizationRequest organizationRequest) {
         OrganizationEntity organizationEntity = organizationMapper.toEntity(organizationRequest);
-        if (organizationRequest.getLoginId()!=null){
+        if (organizationRequest.getLoginId() != null) {
             organizationEntity.setLoginEntity(new LoginEntity().setId(organizationRequest.getLoginId()));
         }
         return organizationRepository.save(organizationEntity).getId();
@@ -41,7 +42,31 @@ public class OrganizationServiceImpl implements OrganizationService {
         return organizationMapper.toDto(organizationEntity);
     }
 
+    @Override
+    public void update(Long id, UpdateOrganizationRequest organizationRequest) {
+        OrganizationEntity organizationEntity = getById(id);
+        update(organizationEntity, organizationRequest);
+        organizationRepository.save(organizationEntity);
+    }
+
+    @Override
+    public void delete(Long id) {
+        organizationRepository.deleteById(id);
+    }
+
     private OrganizationEntity getById(Long id) {
         return organizationRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+    }
+
+    private void update(OrganizationEntity organizationEntity, UpdateOrganizationRequest organizationRequest) {
+        if (organizationRequest.getName() != null) {
+            organizationEntity.setName(organizationRequest.getName());
+        }
+        if (organizationRequest.getAddress() != null) {
+            organizationEntity.setAddress(organizationRequest.getAddress());
+        }
+        if (organizationRequest.getServices() != null) {
+            organizationEntity.setServices(organizationRequest.getServices());
+        }
     }
 }

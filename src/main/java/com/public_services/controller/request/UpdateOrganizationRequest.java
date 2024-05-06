@@ -1,18 +1,17 @@
-package com.public_services.controller.response;
+package com.public_services.controller.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Value;
 
-import java.io.Serializable;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrganizationResponse {
+public class UpdateOrganizationRequest {
+
     private String name;
-    private String pan;
     private String address;
-    private String email;
+    private List<String> services;
 }
