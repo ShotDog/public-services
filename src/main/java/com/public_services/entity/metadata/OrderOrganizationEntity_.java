@@ -13,5 +13,5 @@ public class OrderOrganizationEntity_ {
     public static final String PAN = "pan";
     public static final String ADDRESS = "address";
     public static final String EMAIL = "email";
-
+    public static final String IS_PROCESSED = "is_processed";
 }

@@ -1,44 +1,43 @@
 package com.public_services.entity;
 
-import com.public_services.entity.metadata.OrderOrganizationEntity_;
+import com.public_services.entity.metadata.Employees_;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.DynamicUpdate;
+import lombok.experimental.Accessors;
 import org.hibernate.proxy.HibernateProxy;
 
 import java.util.Objects;
 
 @Entity
-@Table(name = OrderOrganizationEntity_.TABLE_NAME)
-@AllArgsConstructor
+@Table(name = Employees_.TABLE_NAME)
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
-@DynamicUpdate
-public class OrderOrganizationEntity {
+@Accessors(chain = true)
+public class Employee extends Audit{
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = OrderOrganizationEntity_.ID)
+    @Column(name = Employees_.ID)
     private Long id;
 
-    @Column(name = OrderOrganizationEntity_.NAME)
-    private String name;
+    @Column(name = Employees_.FULL_NAME)
+    private String fullName;
 
-    @Column(name = OrderOrganizationEntity_.PAN)
-    private String pan;
+    @Column(name = Employees_.POSITION)
+    private String position;
 
-    @Column(name = OrderOrganizationEntity_.EMAIL)
-    private String email;
+    @ManyToOne
+    @JoinColumn(name = Employees_.LOGIN_ID)
+    private LoginEntity login;
 
-    @Column(name = OrderOrganizationEntity_.ADDRESS)
-    private String address;
-
-    @Column(name = OrderOrganizationEntity_.IS_PROCESSED)
-    private Boolean isProcessed;
+    @ManyToOne
+    @JoinColumn(name = Employees_.ORGANIZATION_ID)
+    private OrganizationEntity organization;
 
     @Override
     public final boolean equals(Object o) {
@@ -47,8 +46,8 @@ public class OrderOrganizationEntity {
         Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
         Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
-        OrderOrganizationEntity that = (OrderOrganizationEntity) o;
-        return getId() != null && Objects.equals(getId(), that.getId());
+        Employee employee = (Employee) o;
+        return getId() != null && Objects.equals(getId(), employee.getId());
     }
 
     @Override
@@ -58,6 +57,6 @@ public class OrderOrganizationEntity {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "(" + "id = " + id + ", " + "name = " + name + ", " + "pan = " + pan + ", " + "email = " + email + ", " + "address = " + address + ")";
+        return getClass().getSimpleName() + "(" + "id = " + id + ", " + "fullName = " + fullName + ", " + "position = " + position + ", " + "login = " + login + ", " + "organization = " + organization + ")";
     }
 }

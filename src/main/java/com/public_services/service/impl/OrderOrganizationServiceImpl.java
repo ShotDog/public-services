@@ -33,6 +33,7 @@ public class OrderOrganizationServiceImpl implements OrderOrganizationService {
     @Override
     public Long create(CreateOrderOrganizationRequest createOrderOrganizationRequest) {
         OrderOrganizationEntity orderOrganizationEntity = orderOrganizationMapper.toEntity(createOrderOrganizationRequest);
+        orderOrganizationEntity.setIsProcessed(false);
         return orderOrganizationRepository.save(orderOrganizationEntity).getId();
     }
 
@@ -48,6 +49,10 @@ public class OrderOrganizationServiceImpl implements OrderOrganizationService {
         Long organizationId = organizationService.create(createOrganizationRequest);
 
         mailService.sendEmail(orderOrganizationEntity.getEmail(), "Ваш пароль такой : 12345678");
+
+        orderOrganizationEntity.setIsProcessed(true);
+        orderOrganizationRepository.save(orderOrganizationEntity);
+
         return organizationId;
     }
 

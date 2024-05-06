@@ -32,7 +32,7 @@ public class LoginController {
     }
 
     @GetMapping("/auth")
-    public ResponseEntity<String> login(LoginRequest loginRequest) {
+    public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
         String role = loginService.login(loginRequest);
         return new ResponseEntity<>(role, HttpStatus.OK);
     }
