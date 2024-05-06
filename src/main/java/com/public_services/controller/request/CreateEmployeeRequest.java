@@ -13,4 +13,5 @@ public class CreateEmployeeRequest {
     private String position;
     private Long organizationId;
     private String email;
+    private String rate;
 }

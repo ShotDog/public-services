@@ -12,5 +12,7 @@ public class EmployeeResponse {
     private Long id;
     private String fullName;
     private String position;
+    private String rate;
+    private String email;
 
 }

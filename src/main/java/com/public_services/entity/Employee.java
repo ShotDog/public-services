@@ -1,6 +1,7 @@
 package com.public_services.entity;
 
 import com.public_services.entity.metadata.Employees_;
+import com.public_services.enums.Rate;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,6 +31,10 @@ public class Employee extends Audit{
 
     @Column(name = Employees_.POSITION)
     private String position;
+
+    @Column(name = Employees_.RATE)
+    @Enumerated(EnumType.ORDINAL)
+    private Rate rate;
 
     @ManyToOne
     @JoinColumn(name = Employees_.LOGIN_ID)

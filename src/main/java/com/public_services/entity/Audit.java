@@ -23,11 +23,11 @@ import java.time.LocalDateTime;
 public class Audit {
 
     @CreatedDate
-    @Column(name = Audit_.CREATED_DATE)
+    @Column(name = Audit_.CREATED_DATE, updatable = false)
     private LocalDateTime createdDate;
 
     @LastModifiedDate
-    @Column(name = Audit_.UPDATED_DATE)
+    @Column(name = Audit_.UPDATED_DATE, insertable = false)
     private LocalDateTime updatedDate;
 
 }

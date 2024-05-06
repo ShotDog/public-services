@@ -6,6 +6,7 @@ import com.public_services.controller.request.UpdateEmployeeRequest;
 import com.public_services.controller.response.EmployeeResponse;
 import com.public_services.entity.Employee;
 import com.public_services.entity.LoginEntity;
+import com.public_services.enums.Rate;
 import com.public_services.mapper.EmployeesMapper;
 import com.public_services.repository.EmployeeRepository;
 import com.public_services.service.EmployeeService;
@@ -28,6 +29,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Long create(CreateEmployeeRequest createEmployeeRequest) {
         Employee employee = employeesMapper.toEntity(createEmployeeRequest);
+        employee.setRate(createEmployeeRequest.getRate() == null ? Rate.FIVE_AND_TWO : Rate.parseText(createEmployeeRequest.getRate()));
 
         CreateLoginRequest createLoginRequest = new CreateLoginRequest(createEmployeeRequest.getEmail(), null);
         Long loginId = loginService.create(createLoginRequest);
@@ -58,10 +60,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     private void update(Employee employee, UpdateEmployeeRequest updateEmployeeRequest) {
-        if (updateEmployeeRequest.getFullName()!=null){
+        if (updateEmployeeRequest.getFullName() != null) {
             employee.setFullName(updateEmployeeRequest.getFullName());
         }
-        if (updateEmployeeRequest.getPosition()!=null){
+        if (updateEmployeeRequest.getPosition() != null) {
             employee.setPosition(updateEmployeeRequest.getPosition());
         }
     }
