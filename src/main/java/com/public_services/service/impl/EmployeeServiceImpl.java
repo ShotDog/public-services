@@ -11,6 +11,7 @@ import com.public_services.mapper.EmployeesMapper;
 import com.public_services.repository.EmployeeRepository;
 import com.public_services.service.EmployeeService;
 import com.public_services.service.LoginService;
+import com.public_services.service.ScheduleService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -26,6 +27,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private final LoginService loginService;
 
+    private final ScheduleService scheduleService;
+
     @Override
     public Long create(CreateEmployeeRequest createEmployeeRequest) {
         EmployeeEntity employeeEntity = employeesMapper.toEntity(createEmployeeRequest);
@@ -34,13 +37,21 @@ public class EmployeeServiceImpl implements EmployeeService {
         CreateLoginRequest createLoginRequest = new CreateLoginRequest(createEmployeeRequest.getEmail(), null);
         Long loginId = loginService.create(createLoginRequest);
         employeeEntity.setLogin(new LoginEntity().setId(loginId));
-        return employeeRepository.save(employeeEntity).getId();
+
+        Long id = employeeRepository.save(employeeEntity).getId();
+        scheduleService.createSchedule(employeeEntity);
+        return id;
     }
 
     @Override
     public Page<EmployeeResponse> findAll(Pageable pageable) {
         Page<EmployeeEntity> employees = employeeRepository.findAll(pageable);
         return employees.map(employeesMapper::toResponse);
+    }
+
+    @Override
+    public EmployeeEntity findById(Long employeeId) {
+        return getById(employeeId);
     }
 
     @Override
