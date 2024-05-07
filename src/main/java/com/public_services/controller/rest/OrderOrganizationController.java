@@ -24,8 +24,8 @@ public class OrderOrganizationController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<OrderOrganizationResponse>> findAll(Pageable pageable) {
-        Page<OrderOrganizationResponse> orderOrganizationResponses = orderOrganizationService.findAll(pageable);
+    public ResponseEntity<Page<OrderOrganizationResponse>> findAll(@RequestParam(required = false) Boolean isProcessed, Pageable pageable) {
+        Page<OrderOrganizationResponse> orderOrganizationResponses = orderOrganizationService.findAll(isProcessed, pageable);
         return ResponseEntity.ok(orderOrganizationResponses);
     }
 

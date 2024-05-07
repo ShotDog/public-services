@@ -9,10 +9,10 @@ public interface OrderOrganizationService {
 
     Long create(CreateOrderOrganizationRequest createOrderOrganizationRequest);
 
+    Page<OrderOrganizationResponse> findAll(Boolean isProcessed, Pageable pageable);
+
     Long approveOrder(Long id);
 
     void rejectOrder(Long id);
-
-    Page<OrderOrganizationResponse> findAll(Pageable pageable);
 
 }

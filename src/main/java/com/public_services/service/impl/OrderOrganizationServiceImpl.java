@@ -64,8 +64,13 @@ public class OrderOrganizationServiceImpl implements OrderOrganizationService {
     }
 
     @Override
-    public Page<OrderOrganizationResponse> findAll(Pageable pageable) {
-        Page<OrderOrganizationEntity> orderOrganizationEntities = orderOrganizationRepository.findAll(pageable);
+    public Page<OrderOrganizationResponse> findAll(Boolean isProcessed, Pageable pageable) {
+        Page<OrderOrganizationEntity> orderOrganizationEntities;
+        if (isProcessed != null) {
+            orderOrganizationEntities = orderOrganizationRepository.findByIsProcessed(isProcessed, pageable);
+        } else {
+            orderOrganizationEntities = orderOrganizationRepository.findAll(pageable);
+        }
         return orderOrganizationEntities.map(orderOrganizationMapper::toResponse);
     }
 

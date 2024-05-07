@@ -14,4 +14,6 @@ public class OrderOrganizationResponse {
     private String pan;
     private String email;
     private String address;
+    private Boolean isProcessed;
+
 }
