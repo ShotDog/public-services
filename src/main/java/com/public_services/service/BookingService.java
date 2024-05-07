@@ -14,7 +14,7 @@ public interface BookingService {
 
     BookingResponse findById(Long id);
 
-    Page<BookingResponse> findByUser(Long userId);
+    Page<BookingResponse> findByUser(Long userId, Pageable pageable);
 
     void update(Long id, UpdateBookingRequest updateBookingRequest);
 

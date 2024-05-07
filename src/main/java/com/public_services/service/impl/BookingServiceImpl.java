@@ -52,8 +52,8 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public Page<BookingResponse> findByUser(Long userId) {
-        Page<BookingEntity> bookingEntities = bookingRepository.findByUser_Id(userId);
+    public Page<BookingResponse> findByUser(Long userId, Pageable pageable) {
+        Page<BookingEntity> bookingEntities = bookingRepository.findByUser_Id(userId, pageable);
         return bookingEntities.map(bookingMapper::toResponse);
     }
 

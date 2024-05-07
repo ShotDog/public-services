@@ -37,8 +37,8 @@ public class BookingController {
     }
 
     @GetMapping("/{id}/users")
-    public ResponseEntity<Page<BookingResponse>> findByUserId(@PathVariable("id") Long userId) {
-        Page<BookingResponse> bookingResponses = bookingService.findByUser(userId);
+    public ResponseEntity<Page<BookingResponse>> findByUserId(@PathVariable("id") Long userId, Pageable pageable) {
+        Page<BookingResponse> bookingResponses = bookingService.findByUser(userId, pageable);
         return ResponseEntity.status(200).body(bookingResponses);
     }
 
