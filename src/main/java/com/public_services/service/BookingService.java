@@ -16,6 +16,9 @@ public interface BookingService {
 
     void update(Long id, UpdateBookingRequest updateBookingRequest);
 
-    void delete(Long id);
+    void approveOrder(Long id);
 
+    void rejectOrder(Long id);
+
+    void delete(Long id);
 }

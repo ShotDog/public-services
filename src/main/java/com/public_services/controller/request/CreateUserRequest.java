@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateServiceRequest {
+public class CreateUserRequest {
 
-    private String name;
-    private Long organizationId;
+    private String email;
+    private String password;
 
 }

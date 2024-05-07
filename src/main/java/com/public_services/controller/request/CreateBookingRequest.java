@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class CreateBookingRequest {
 
-    private String serviceName;
+    private Long serviceId;
     private LocalDateTime dateTime;
     private Long employeeId;
     private Long userId;

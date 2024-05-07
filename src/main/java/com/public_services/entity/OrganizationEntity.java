@@ -6,10 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.proxy.HibernateProxy;
 
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -19,6 +19,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @DynamicUpdate
+@Accessors(chain = true)
 public class OrganizationEntity extends Audit {
 
     @Id
@@ -35,14 +36,9 @@ public class OrganizationEntity extends Audit {
     @Column(name = OrganizationEntity_.LOCATION)
     private String address;
 
-    @Column(name = OrganizationEntity_.SERVICES)
-    @ElementCollection
-    private List<String> services;
-
     @ManyToOne
     @JoinColumn(name = OrganizationEntity_.LOGIN_ID)
     private LoginEntity loginEntity;
-
 
 
     @Override

@@ -29,6 +29,9 @@ public class ServiceEntity {
     @Column(name = ServiceEntity_.NAME)
     private String name;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private OrganizationEntity organizationEntity;
+
     @Override
     public final boolean equals(Object o) {
         if (this == o) return true;

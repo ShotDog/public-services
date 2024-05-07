@@ -23,8 +23,9 @@ public class BookingEntity {
     @Column(name = BookingEntity_.ID)
     private Long id;
 
-    @Column(name = BookingEntity_.SERVICE_NAME)
-    private String serviceName;
+    @ManyToOne
+    @JoinColumn(name = BookingEntity_.SERVICE_ID)
+    private ServiceEntity service;
 
     @Column(name = BookingEntity_.DATE_TIME)
     private LocalDateTime dateTime;
@@ -58,6 +59,6 @@ public class BookingEntity {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "(" + "id = " + id + ", " + "serviceName = " + serviceName + ", " + "dateTime = " + dateTime + ", " + "isProcessed = " + isProcessed + ")";
+        return getClass().getSimpleName() + "(" + "id = " + id + ", " + "service = " + service + ", " + "dateTime = " + dateTime + ", " + "isProcessed = " + isProcessed + ")";
     }
 }

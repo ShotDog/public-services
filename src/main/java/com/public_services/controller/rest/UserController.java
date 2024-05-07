@@ -1,5 +1,6 @@
 package com.public_services.controller.rest;
 
+import com.public_services.controller.request.CreateUserRequest;
 import com.public_services.controller.request.UpdateUserRequest;
 import com.public_services.controller.response.UserResponse;
 import com.public_services.service.UserService;
@@ -16,6 +17,12 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserService userService;
+
+    @PostMapping
+    public ResponseEntity<Long> create(@RequestBody CreateUserRequest createUserRequest){
+        Long userId = userService.create(createUserRequest);
+        return new ResponseEntity<>(userId, HttpStatus.CREATED);
+    }
 
     @GetMapping
     public ResponseEntity<Page<UserResponse>> getAll(Pageable pageable) {

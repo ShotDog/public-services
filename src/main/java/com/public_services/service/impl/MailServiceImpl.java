@@ -13,7 +13,6 @@ public class MailServiceImpl implements MailService {
     @Override
     public void sendEmail(String email, String msg) {
 //        System.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");
-        //todo: поменять сендера
         String from = "servicesbel@mail.ru";
         String to = email;
         Properties properties = System.getProperties();

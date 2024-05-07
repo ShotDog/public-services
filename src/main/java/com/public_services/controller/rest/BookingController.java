@@ -42,6 +42,18 @@ public class BookingController {
         return ResponseEntity.status(200).body(HttpStatus.OK);
     }
 
+    @PatchMapping("/{id}/approving")
+    public ResponseEntity<HttpStatus> approving(@PathVariable Long id) {
+        bookingService.approveOrder(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PatchMapping("/{id}/rejecting")
+    public ResponseEntity<HttpStatus> approve(@PathVariable Long id) {
+        bookingService.rejectOrder(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> delete(@PathVariable Long id) {
         bookingService.delete(id);

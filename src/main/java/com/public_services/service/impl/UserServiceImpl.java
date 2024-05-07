@@ -1,10 +1,14 @@
 package com.public_services.service.impl;
 
+import com.public_services.controller.request.CreateLoginRequest;
+import com.public_services.controller.request.CreateUserRequest;
 import com.public_services.controller.request.UpdateUserRequest;
 import com.public_services.controller.response.UserResponse;
+import com.public_services.entity.LoginEntity;
 import com.public_services.entity.UserInfoEntity;
 import com.public_services.mapper.UserMapper;
 import com.public_services.repository.UserRepository;
+import com.public_services.service.LoginService;
 import com.public_services.service.UserService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +22,17 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+
+    private final LoginService loginService;
+
+    @Override
+    public Long create(CreateUserRequest createUserRequest) {
+        Long loginEntityId = loginService.create(new CreateLoginRequest(createUserRequest.getEmail(), createUserRequest.getPassword()));
+
+        UserInfoEntity userInfoEntity = new UserInfoEntity();
+        userInfoEntity.setLoginEntity(new LoginEntity().setId(loginEntityId));
+        return userRepository.save(userInfoEntity).getId();
+    }
 
     @Override
     public Page<UserResponse> findAll(Pageable pageable) {

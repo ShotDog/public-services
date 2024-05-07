@@ -65,8 +65,5 @@ public class OrganizationServiceImpl implements OrganizationService {
         if (organizationRequest.getAddress() != null) {
             organizationEntity.setAddress(organizationRequest.getAddress());
         }
-        if (organizationRequest.getServices() != null) {
-            organizationEntity.setServices(organizationRequest.getServices());
-        }
     }
 }
