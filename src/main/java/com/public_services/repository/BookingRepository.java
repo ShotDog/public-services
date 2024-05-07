@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BookingRepository extends JpaRepository<BookingEntity, Long> {
     Page<BookingEntity> findByIsProcessed(Boolean isProcessed, Pageable pageable);
+
+    Page<BookingEntity> findByUser_Id(Long id, Pageable pageable);
 }

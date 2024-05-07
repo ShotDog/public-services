@@ -41,6 +41,10 @@ public class BookingEntity {
     @JoinColumn(name = BookingEntity_.USER_ID)
     private UserInfoEntity user;
 
+    @Lob
+    @Column(name = BookingEntity_.FILE_DATA)
+    private byte[] file;
+
     @Override
     public final boolean equals(Object o) {
         if (this == o) return true;

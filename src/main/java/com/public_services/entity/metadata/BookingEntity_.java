@@ -14,4 +14,6 @@ public class BookingEntity_ {
     public static final String DATE_TIME = "date_time";
     public static final String IS_PROCESSED = "is_processed";
 
+    public static final String FILE_DATA = "file_data";
+
 }

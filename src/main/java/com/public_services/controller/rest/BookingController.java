@@ -36,6 +36,12 @@ public class BookingController {
         return ResponseEntity.status(200).body(bookingResponse);
     }
 
+    @GetMapping("/{id}/users")
+    public ResponseEntity<Page<BookingResponse>> findByUserId(@PathVariable("id") Long userId) {
+        Page<BookingResponse> bookingResponses = bookingService.findByUser(userId);
+        return ResponseEntity.status(200).body(bookingResponses);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<HttpStatus> update(@PathVariable Long id, @RequestBody UpdateBookingRequest request) {
         bookingService.update(id, request);

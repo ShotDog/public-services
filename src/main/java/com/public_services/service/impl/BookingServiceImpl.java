@@ -52,6 +52,12 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
+    public Page<BookingResponse> findByUser(Long userId) {
+        Page<BookingEntity> bookingEntities = bookingRepository.findByUser_Id(userId);
+        return bookingEntities.map(bookingMapper::toResponse);
+    }
+
+    @Override
     public void update(Long id, UpdateBookingRequest updateBookingRequest) {
         BookingEntity bookingEntity = getById(id);
         update(bookingEntity, updateBookingRequest);
