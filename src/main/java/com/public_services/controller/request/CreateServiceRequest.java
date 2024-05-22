@@ -11,5 +11,6 @@ public class CreateServiceRequest {
 
     private String name;
     private Long organizationId;
+    private Boolean hasFile;
 
 }

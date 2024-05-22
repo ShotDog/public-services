@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ServiceResponse {
+
     private Long id;
     private String name;
+    private Boolean hasFile;
+
 }

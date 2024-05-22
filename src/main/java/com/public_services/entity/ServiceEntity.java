@@ -29,6 +29,9 @@ public class ServiceEntity {
     @Column(name = ServiceEntity_.NAME)
     private String name;
 
+    @Column(name = ServiceEntity_.HAS_FILE)
+    private Boolean hasFile;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private OrganizationEntity organizationEntity;
 
